@@ -1,8 +1,8 @@
 # build output
 dist
 .next
-
 .idea
+static/**/fonts
 
 # dependencies
 node_modules
