@@ -1,6 +1,7 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet, injectGlobal } from 'styled-components'
 import fonts from '../static/fonts'
+import reset from '../static/reset'
 
 export default class MyDocument extends Document {
     static getInitialProps ({ renderPage }) {
@@ -28,4 +29,5 @@ export default class MyDocument extends Document {
 
 injectGlobal`
   ${fonts}
+  ${reset}
 `

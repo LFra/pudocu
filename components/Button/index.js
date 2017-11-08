@@ -3,17 +3,18 @@ import styled, { css } from 'styled-components'
 import Link from 'next/link'
 
 export const buttonStyles = css`
-    font-family: ${props => props.theme.typo.font.primary.semiBold};
+    color: ${props => props.active ? props.theme.color.neutral[1] : props.theme.color.neutral[5]};
+    font-family: ${props => props.theme.typo.font.primary.normal};
+    font-weight: 600;
     font-size: 0.75em;
     letter-spacing: 1.5px;
-    color: ${props => props.active ? props.theme.color.neutral[1] : props.theme.color.neutral[5]};
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
     white-space: nowrap;
     box-sizing: border-box;
     user-select: none;
-    line-height: 3em;
+    line-height: 40px;
     margin-top: 1px;
     display: block;
     background-color: rgba(0,0,0,0.0);
@@ -42,12 +43,27 @@ const Anchor = styled.a`
     ${buttonStyles};
 `
 
+const IconAnchor = styled.a`
+  display: block;
+  width: 40px;
+  height: 40px;
+  z-index: 10;
+  cursor: pointer;
+  background: url('/static/icons/${props => props.icon}.svg') no-repeat center;
+  ${props => props.border && withBorder};
+  opacity: 0.7;
+  transition: background-color, opacity 0.15s ease;
+  :hover {
+    opacity: 1;
+  }
+`
+
 const Wrapper = styled.div`
   display: inline-block;
   ${props => props.border && withBorder};
 `
 
-export const Button = ({ href, onClick, handleRoute, active, children, border, tab}) => {
+export const Button = ({ href, onClick, handleRoute, active, children, border, tab, icon}) => {
     let button = (
         <Anchor href={href} onClick={onClick} active={active} tab={tab} border={border}>
             {children}
@@ -61,6 +77,12 @@ export const Button = ({ href, onClick, handleRoute, active, children, border, t
                     {children}
                 </Anchor>
             </Link>
+        )
+    }
+
+    if (icon) {
+        button = (
+            <IconAnchor icon={icon}/>
         )
     }
 
